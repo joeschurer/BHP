@@ -1,0 +1,3 @@
+source /home/kali/bhp/venv3/bin/activate
+for testing run server then client
+once connected via command shell run CTRL+D first to send EOF to drop to shell
