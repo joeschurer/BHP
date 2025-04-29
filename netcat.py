@@ -82,7 +82,6 @@ class NetCat:
                 client_socket.send(message.encode())
 
         elif self.args.command:
-            print('hi')
             cmd_buffer = b''
             while True:
                 try:
