@@ -5,6 +5,7 @@ import sys
 import threading
 
 CWD = os.path.dirname(os.path.realpath(__file__))
+#obv use not this operationally
 HOSTKEY = paramiko.RSAKey(filename=os.path.join(CWD, 'test_rsa.key'))
 
 class Server (paramiko.ServerInterface):
@@ -64,3 +65,4 @@ if __name__ == '__main__':
                 break
     except KeyboardInterrupt:
         bhSession.close()
+
