@@ -13,7 +13,7 @@ class Server (paramiko.ServerInterface):
 
     def check_channel_request(self, kind, chanid):
         if kind == 'session':
-            return paramiko.OPEN_SUCCEDED
+            return paramiko.OPEN_SUCCEEDED
         return paramiko.OPEN_FAILED_ADMINISTRATIVELY_PROHIBITED
     
     def check_auth_password(self, username, password):
