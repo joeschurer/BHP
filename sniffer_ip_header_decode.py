@@ -6,7 +6,7 @@ import sys
 
 class IP:
     def __init__(self, buff=None):
-        header = struct.unpack('<BBHHHBBH4s4s',buff)
+        header = struct.unpack('!BBHHHBBH4s4s',buff)
         self.ver = header[0] >> 4
         self.ihl = header[0] & 0xf
         self.tos = header[1]
@@ -29,12 +29,12 @@ class IP:
         try: 
             self.protocol = self.protocol_map[self.protocol_num]
         except Exception as e:
-            print('%s No protocol for %s' % {e, self.protocol_num})
+            print('%s No protocol for %s' % (e, self.protocol_num))
             self.protocol = str(self.protocol_num)
 
 def sniff(host):
     if os.name == 'nt':
-        socket_protocol = SOCKET.IPPROTO_IP
+        socket_protocol = socket.IPPROTO_IP
     else:
         socket_protocol =  socket.IPPROTO_ICMP
     
@@ -43,7 +43,11 @@ def sniff(host):
     #grab ip header
     sniffer.setsockopt(socket.IPPROTO_IP, socket.IP_HDRINCL, 1)
     if os.name == 'nt':
-        sniffer.ioctl(socket.SIO_RCVALL, socket.RCVALL_ON)
+        try:
+            sniffer.ioctl(socket.SIO_RCVALL, socket.RCVALL_ON)
+        except OSError as e:
+            print(f"Error enabling promiscuous mode: {e}")
+            sys.exit(1)
     
     try:
         while True:
