@@ -68,7 +68,7 @@ class Scanner:
         if os.name == 'nt':
             self.socket.ioctl(socket.SIO_RCVALL, socket.RCVALL_ON)
     def sniff(self):
-        hosts_up = str([f'{str(self.host)} *'])
+        hosts_up = set([f'{str(self.host)} *'])
         try:
             while True:
                 raw_buffer = self.socket.recvfrom(65535)[0]
