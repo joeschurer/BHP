@@ -36,7 +36,7 @@ class IP:
         try: 
             self.protocol = self.protocol_map[self.protocol_num]
         except Exception as e:
-            print('%s No protocol for %s' % (e, self.protocol_num))
+            print('%s No protocol for %s from %s' % (e, self.protocol_num,self.src_address))
             self.protocol = str(self.protocol_num)
 
 class ICMP:
@@ -67,7 +67,6 @@ class Scanner:
 
         if os.name == 'nt':
             self.socket.ioctl(socket.SIO_RCVALL, socket.RCVALL_ON)
-
     def sniff(self):
         hosts_up = str([f'{str(self.host)} *'])
         try:
