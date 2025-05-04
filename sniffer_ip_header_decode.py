@@ -55,7 +55,7 @@ def sniff(host):
     else:
         # Linux: use AF_PACKET to get all IP traffic
         sniffer = socket.socket(socket.AF_PACKET, socket.SOCK_RAW, socket.ntohs(0x0003))
-        sniffer.bind((host, 0))  # `host` is the interface name, e.g. 'eth0'
+        sniffer.bind((host, 0))
     
     try:
         while True:
@@ -85,7 +85,8 @@ def sniff(host):
 
 if __name__ == '__main__':
     if len(sys.argv) == 2:
-        host = sys.argv[1]  # On Linux, pass interface name like 'eth0'
+        host = sys.argv[1]
     else:
-        host = '0.0.0.0' if os.name == 'nt' else 'eth0'
+        host = '0.0.0.0'
     sniff(host)
+            
