@@ -85,8 +85,7 @@ def sniff(host):
 
 if __name__ == '__main__':
     if len(sys.argv) == 2:
-        host = sys.argv[1]
+        host = sys.argv[1]  # On Linux, pass interface name like 'eth0'
     else:
-        host = '0.0.0.0'
+        host = '0.0.0.0' if os.name == 'nt' else 'eth0'
     sniff(host)
-            
