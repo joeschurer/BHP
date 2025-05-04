@@ -79,7 +79,7 @@ def sniff(host):
     except KeyboardInterrupt:
         if os.name == 'nt':
             sniffer.ioctl(socket.SIO_RCVALL, socket.RCVALL_OFF)
-            sys.exit()
+        sys.exit()
 
 if __name__ == '__main__':
     if len(sys.argv) == 2:
