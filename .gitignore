@@ -1,2 +1,4 @@
-
+venv3/*
+*.pcap
 test_rsa.key
+venv3/pyvenv.cfg
